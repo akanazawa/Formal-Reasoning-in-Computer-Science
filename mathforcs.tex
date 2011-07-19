@@ -75,7 +75,7 @@ worst-case latency.
   where the challenge is to direct a packet starting at input $i$ to
   output $\pi(i)$
   \begin{itemize}
-  \item Solution: specifiation fo the path taken for all $N$
+  \item Solution: specification fo the path taken for all $N$
     packets. Where the path of packet $i$ to output $\pi(i)$ is
     denoted $P_{i, \pi(i)}$.
   \item The \textbf{congestion} of a set of paths $P_{0,\pi(0)},
@@ -84,7 +84,7 @@ worst-case latency.
     for $\pi(i) = (N-1)-i$, the congestion is 4. Lower the congestion,
     the better the set of paths.
   \item The \textbf{Max congestion} of a network is ``maximum over all
-    permuations $\pi$ of the minimum over all paths' congression...
+    permutations $\pi$ of the minimum over all paths' congestion...
     $\arg\max_{\pi}\arg\min_{\text{all possible paths}}Cong(P_{i, \pi(i)})$ where $Cong$ is the congestion of a given path?
   \item The max congestion
     of a complete binary tree is $N$ with $\pi(i) = (N-1)-i$, because
@@ -103,7 +103,7 @@ Goals:
 \begin{itemize} 
 \item larger the switches $\ra$ smaller diameter. Most nodes in a binary
   tree takes 3 in/out edges => 3x3 switches
-\item Want: hwo to get NxN monster switch using 3x3 simple switches
+\item Want: how to get NxN monster switch using 3x3 simple switches
 \end{itemize}
 
 \subsection{2-D Array/Grid/Crossbar}
@@ -119,7 +119,7 @@ Goals:
 The (max) congestion of an N-input array is 2
 \end{theorem}
  \begin{proof} 
-It's at most 2: Let $\pi$ be any permuation. Let $P_{i, \pi(i)}$ to be the path fro
+It's at most 2: Let $\pi$ be any permutation. Let $P_{i, \pi(i)}$ to be the path fro
 input $i$ rightward to col $j$, downward to output $\pi(i)$ (can go
 other ways but this is the best path), so the $(i, j)$th switch transmits at most 2 packets. The one coming from
 left and the one coming from the top..?\\
@@ -157,7 +157,7 @@ Let $B_n$ denote the butterfly network with $N=2^n$ inputs and $N$ outputs.
 
 For $B_n$, there is a unique path from each input to each output,
 so congestion is the max number of transmission for a vertex.
-(The number of total verticies is $N(log(N)+1)$, or $2^n(n+1)$... useless)
+(The number of total vertices is $N(log(N)+1)$, or $2^n(n+1)$... useless)
 
 For every vertex $v$ at level $i$, there's a path from exactly $2^i$
 input vertices to $v$ and exactly $2^{n-i}$ output vertices (where $n$
@@ -173,10 +173,10 @@ network. i.e for $n=3$, level 0 vertices have a path from 1 input
 vertex and have a path to 8 output vertices, level 1 has 2-from and
 4-to, level 2 has 4-from and 2-to, and the last level has 8-from and
 1-to. Now there are $n+1$ levels (or $log(N)+1$). So with even $n$,
-there exists a center level with verticies that have a path from exactly $2^{(n/2)}$
+there exists a center level with vertices that have a path from exactly $2^{(n/2)}$
 input vertices, and a path to exactly $2^{n/2}$ output vertices.
 
-Which means that congestion of verticies at the middle level is at most
+Which means that congestion of vertices at the middle level is at most
 $\sqrt{N} = 2^{n/2}$. 
 
 ... not clear which one is at least and at most.. It's like.. at most
