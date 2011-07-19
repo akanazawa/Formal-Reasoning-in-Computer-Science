@@ -1,0 +1,200 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+%\usepackage{algorithmic} 
+\usepackage {ifpdf} 
+\pagestyle{headings}
+\textheight    8.4in
+\textwidth      6.2in
+\topmargin        0in
+\oddsidemargin  0in
+\evensidemargin 0in
+
+\newcounter{set}
+\def\theset{\arabic{set}}
+\def\theequation{\theset.\arabic{equation}}
+\newcommand{\sig}{\sigma}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\eps}{\epsilon}
+\newcommand{\ah}{\alpha}
+\newcommand{\lam}{\lambda}
+\newcommand{\gam}{\gamma}
+\newcommand{\ol}{\overline}
+\newcommand{\noi}{\noindent}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\beq}{\begin{quote}}
+\newcommand{\enq}{\end{quote}}
+\newcommand{\hsone}{\hspace*{1cm}}
+\newcommand{\vsone}{\vspace*{1cm}}
+\newcommand{\hstwo}{\hspace*{2cm}}
+\newcommand{\So}{\\ {\tt Solution:}}
+
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\title{Mathematics for Computer Science - notes} 
+\author{Angjoo Kanazawa}
+\date{\today}
+\setcounter{set}{1}
+
+
+\begin{document}
+
+\maketitle \thispagestyle{empty}
+\setcounter{section}{7}
+\section{Chapter 8 Communication Networks}
+\label{sec:chapt-8-comm}
+
+\subsection{Complete Binary Tree}
+\label{sec:complete-binary-tree}
+
+Definitions/formulas:
+\begin{itemize}
+\item \textbf{Switches} direct packets through the network (circle nodes)
+\item \textbf{Latency} is the time required for a packet to travel from an input to an output.
+\item The \textbf{diameter} of a network is the number of switches on the shortest path between
+the input and output that are farthest apart. Approxmiates the
+worst-case latency.
+\item The diameter of a complete binary tree with N in/outputs is
+  $2logN+1$. Not bad, even with $2^{10}$ terminals, latency is
+  $2log(2^{10})+1 = 21$
+\item Total number of switches in a complete binary tree is $2N-1$.
+\item A \textbf{permutation} is a bijective function $\pi: {0, 1,\dots, N-1} \ra
+  {0, 1, \dots, N-1}$
+\item $\forall \pi \exists$ \textbf{permutation routing problem},
+  where the challenge is to direct a packet starting at input $i$ to
+  output $\pi(i)$
+  \begin{itemize}
+  \item Solution: specifiation fo the path taken for all $N$
+    packets. Where the path of packet $i$ to output $\pi(i)$ is
+    denoted $P_{i, \pi(i)}$.
+  \item The \textbf{congestion} of a set of paths $P_{0,\pi(0)},
+    \dots, P_{N-1, \pi(N-1)} $, is the largest number of paths that pass
+    through a single switch. i.e for $\pi(i) = i$, the congestion is 1,
+    for $\pi(i) = (N-1)-i$, the congestion is 4. Lower the congestion,
+    the better the set of paths.
+  \item The \textbf{Max congestion} of a network is ``maximum over all
+    permuations $\pi$ of the minimum over all paths' congression...
+    $\arg\max_{\pi}\arg\min_{\text{all possible paths}}Cong(P_{i, \pi(i)})$ where $Cong$ is the congestion of a given path?
+  \item The max congestion
+    of a complete binary tree is $N$ with $\pi(i) = (N-1)-i$, because
+    with that $\pi$, every packet needs to go through the root. You can't do better and its
+    horrible.
+  \item over all permutation.. = $N!$ permutations for $N$ in/out
+    networks. For each of those permutations, there are paths that
+    takes $i$ to $\pi(i)$ = a lot of paths, but chose the BEST
+    congestion. And the max of those out of $N!$ perm is the max congestion..
+  \end{itemize}
+
+
+\end{itemize}
+
+Goals:
+\begin{itemize} 
+\item larger the switches $\ra$ smaller diameter. Most nodes in a binary
+  tree takes 3 in/out edges => 3x3 switches
+\item Want: hwo to get NxN monster switch using 3x3 simple switches
+\end{itemize}
+
+\subsection{2-D Array/Grid/Crossbar}
+\label{sec:2-d-array}
+\begin{itemize}
+\item Diameter of an array with $N$ in/outputs is $2N-1$.
+\item Each switch takes two in/out edges, so switch size is $2x2$.
+\item \# of switches is the number of elem in $NxN$ array = $N^2$
+\end{itemize}
+
+
+\begin{theorem}
+The (max) congestion of an N-input array is 2
+\end{theorem}
+ \begin{proof} 
+It's at most 2: Let $\pi$ be any permuation. Let $P_{i, \pi(i)}$ to be the path fro
+input $i$ rightward to col $j$, downward to output $\pi(i)$ (can go
+other ways but this is the best path), so the $(i, j)$th switch transmits at most 2 packets. The one coming from
+left and the one coming from the top..?\\
+It's at least 2: With $\pi(0) = 0$ and $\pi(N-1) = N-1$, the packet in the lower left
+corner must pass two packets. (It's at least so just show it exists).
+  \end{proof}
+
+\subsection{Butterfly}
+\label{sec:butterfly}
+
+\begin{itemize}
+\item All terminals and switches are in $N$ rows, where inputs,
+  ordered, are the first col, output, ordered, are the last col. Now
+  label the rows in binary, so row $i$ has binary number
+  $b_1b_2\cdots b_{logN}$ that represents $i$.
+\item $\exists$ $log(N) + 1$ levels of switches (nodes), numbered from
+  $0$ to $logN$. Each level is a column of $N$ switches. So every
+  switch has a unique sequence $(b_1, b_2, \dots, b_{logN}, l)$, where
+  $b_1b_2\cdots b_{logN}$ is the switch's row label and $l$ is the
+  level of the switch ($0\ra logN$).
+\item So... $Nby1\ra Nbylog(N)+1 \ra Nby1$
+\item Connection: there are directed edges from $(b_1, b_2, \dots,
+  b_{logN}, l)$ to two switches in the next level, one in the same
+  row, one in the row with label $\bar{l+1}$ (inverting bit $l+1$).
+\item Recursive structure. A butterfly of size $2N$ is made up of two
+ $N$  butterflies plus one more level of switches. 
+\end{itemize} There is only one path from an input to an output, where the path is by correcting each
+successive bit with the bit of the output.\\
+
+\begin{corollary}The congestion of the butterfly network is exactly
+  $\sqrt{N}$ when N is an even power of 2:
+\end{corollary}
+\begin{proof}
+Let $B_n$ denote the butterfly network with $N=2^n$ inputs and $N$ outputs.
+
+For $B_n$, there is a unique path from each input to each output,
+so congestion is the max number of transmission for a vertex.
+(The number of total verticies is $N(log(N)+1)$, or $2^n(n+1)$... useless)
+
+For every vertex $v$ at level $i$, there's a path from exactly $2^i$
+input vertices to $v$ and exactly $2^{n-i}$ output vertices (where $n$
+is the power to 2).
+
+
+Since there is a unique path from each input to output,  the number of
+messages that passes through a vertex is at most the minimum of number
+of input or output vertices it has a path from/to. 
+ 
+So congestion must be worst at the center level of the
+network. i.e for $n=3$, level 0 vertices have a path from 1 input
+vertex and have a path to 8 output vertices, level 1 has 2-from and
+4-to, level 2 has 4-from and 2-to, and the last level has 8-from and
+1-to. Now there are $n+1$ levels (or $log(N)+1$). So with even $n$,
+there exists a center level with verticies that have a path from exactly $2^{(n/2)}$
+input vertices, and a path to exactly $2^{n/2}$ output vertices.
+
+Which means that congestion of verticies at the middle level is at most
+$\sqrt{N} = 2^{n/2}$. 
+
+... not clear which one is at least and at most.. It's like.. at most
+and at least because in the middle its $\sqrt{N}$ from and $\sqrt{N}$..
+
+
+  \end{proof}
+
+\end{document}
+
+
+
+%% example of proof in latex
+%  \begin{proof}[$A \cup (A \cap A^c) = A\cap ( A\cup A^c)$]
+%     \begin{align*}
+% A \cup (A \cap A^c) &= (A \cup A) \cap (A\cup A^c)\text{ by
+%   distributive law, Theorem 1.5.c}\\
+% &= A\cap ( A\cup A^c) \text{ by idenpote,
+%   Theorem 1.5.g}
+%     \end{align*}
+%   \end{proof}
