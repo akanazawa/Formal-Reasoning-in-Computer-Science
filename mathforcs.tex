@@ -15,6 +15,7 @@
 \def\theequation{\theset.\arabic{equation}}
 \newcommand{\sig}{\sigma}
 \newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
 \newcommand{\eps}{\epsilon}
 \newcommand{\ah}{\alpha}
 \newcommand{\lam}{\lambda}
@@ -224,6 +225,77 @@ subnetwork. By induction hypothesis $P(a)$, the subneworks can each
 route any permutation with congestion 1, and so we're done. (We only needed to show that
 the first and the last levels have cogestion 1)
 \end{proof}
+
+\section{Relations}
+A \emph{relation} from a set $A$ to set $B$ is a subset $R\subseteq
+A\times B$. Where $R:= \{ (a,b)| a\in A, b\in B\}$. $(a,b)\in R$ also
+written as $aRb$, $a\sim_Rb$.
+
+\begin{itemize}
+\item Relations on one set: Focus on relations on a single set, i.e. $R\subseteq A\times A$.
+\item Relations and Directed Graphs: A relation on a single set $A$ is
+  the same as a directed graph $G=(V, E)$ where $V=A$, and $E=R$.
+\end{itemize}
+
+\subsection{Properties}
+A relation $R$ on a set $A$ is:
+\begin{itemize}
+\item reflexive: $\forall x\in A, xRx$
+\item symmetric/commutative: $\forall x, y\in A, xRy \Ra yRx$
+\item antisymmetric: $\forall x,y\in A, xRy \wedge yRx \Ra x=y$
+
+\item transitive: $\forall x,y,z \in A, xRy \wedge yRz \Ra xRz$
+\end{itemize}
+
+\subsection{Equivalence Relations}
+\textbf{Definitions:}
+\begin{itemize}
+
+
+\item A relation is an \emph{equivalence relation} if
+its reflexive, symmetric, and transitive. i.e. $Z_n$
+
+\item If $R$ is an equivalence relation on a set $A$,
+  \emph{Equivalence class} of an element $x$, is $[x] = \{y|xRy\}$
+\item A \emph{partition/coset} of a set $A$ is disjoint, nonempty subsets
+  $A_1, A_2, \dots,  A_n$  s.t. $A = \bigcup A_i$.
+\end{itemize}
+
+\begin{theorem}
+  The equivalence classes of an equivalence relation on a set A form a
+  partition of A.
+\end{theorem}
+
+\subsection{Partial Orders}
+
+\begin{itemize}
+\item A relation is  a \emph{partial order} if
+its reflexive, \emph{anti}symmetric, and transitive. i.e. rings under
+division, $\le$ relation on $Z$
+\item Denoted: $\preceq$, if $\preceq$ is a partial order on the set
+  $A$, $(A, \preceq)$ is called a \emph{poset}.
+
+\item From theorem 9.3.1, without self-loops, posets are \emph{DAG}s, directed acylic graphs.
+
+\item $\exists a, b\in (A, \preceq)$ s.t. $\nexists$ relation.
+\item such $a,b$ are \emph{incomparable}. i.e. neither $a\preceq b$
+  nor $b\preceq a$. Otherwise they are \emph{comparable}.
+\item A \emph{total order} is a poset where all pairs are comparable.
+\item A total order is called a \emph{topological sort}. A topological
+  sort of a poset $(A, \preceq)$ is a total order $(A, \preceq_T)$
+  s.t. $x\preceq y \Ra x\preceq_T y$.
+\end{itemize}
+\begin{theorem}
+A poset has no directed cycles other than self-loops.
+\end{theorem} 
+  \begin{theorem}
+    Every finite poset has a topological srot
+  \end{theorem}
+
+  \begin{theorem}
+    Every finite poset has a minimal element
+  \end{theorem}
+
 \end{document}
 
 
