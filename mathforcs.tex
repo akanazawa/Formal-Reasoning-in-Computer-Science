@@ -180,11 +180,50 @@ Which means that congestion of vertices at the middle level is at most
 $\sqrt{N} = 2^{n/2}$. 
 
 ... not clear which one is at least and at most.. It's like.. at most
-and at least because in the middle its $\sqrt{N}$ from and $\sqrt{N}$..
+and at least because in the middle its $\sqrt{N}$ from and
+$\sqrt{N}$..
+ \end{proof}
 
+\subsection{Benes Network}
+A back to back butterfly.
+\begin{itemize}
+\item Diameter: $2logN$, switch size 2 by 2, \# of switches $2NlogN$,
+  congestion 1!!
+\end{itemize}
 
-  \end{proof}
+\begin{theorem}
+  The congestion of the N-input Benes network is 1 , where $N=2^a$ for
+  some $a\le 1$.
+\end{theorem}
+\begin{proof}
+Inductive:  Let $P(a)$ be the proposition that congestion of the size $2^a$
+  Benes network is 1.
 
+Base case: WTS: congestion of $N=2^1 = 2$ Benes network is 1. For 2
+input network, there are $2!=2$ permutation, for identity, we can just
+take the straight path, for the other one, they'll just take the
+diagonal. So congestion is 1.
+
+Inductive arg: WTS: $P(a) \ra P(a+1)$ where $a\le 1$. Key insight: a
+2-coloring of the constraints graph corresponds to a solution to the
+routing problem. If we show that the graph is 2-colorable, that means
+we can solve the routing problem with such constraints.
+
+Here's a theorem:
+\begin{theorem}
+  If the graphs $G_1(V, E_1)$ and $G_2 = (V, E_2)$ both have max
+  degree 1, then th egraph $G = (V, E_1\cup E_2)$ is \emph{2-colorable}.
+\end{theorem}
+
+Using that idea, let $\pi$ be any permutation of ${0, 1, \dots,
+  2N-1}$. Define two graphs with those vertices, but one where with edge $u-v$ with $|u-v|=N$,
+and one with edge $u-v$ with $|\pi(u)-\pi(v)} = N$. By the above
+theorem, the graph $G=(V, E_1\cup E_2)$ is 2-colorable. Route one
+color with the upper subnetwork and one color with lower
+subnetwork. By induction hypothesis $P(a)$, the subneworks can each
+route any permutation with congestion 1, and so we're done. (We only needed to show that
+the first and the last levels have cogestion 1)
+\end{proof}
 \end{document}
 
 
