@@ -66,17 +66,17 @@ Repeat until $X \ge \mu$:
 What is the expected number of runs until LV finishes? We're done
 when $X \ge \mu$. Note that $X$
 has a binomial distribution*. Let $Y$ be the number of runs needed for
-the LV to terminate, and $Y_i$ be a random variable indicating if the
-algorithm terminated at $i$th run or not with probability $\hat{p} =
-P(Y_i = 1)$. So $Y$ has a geometric distribution and $E(Y)$, what we
+the LV to terminate, i.e. number of trials before the first sucess. So
+$Y$ has a geometric distribution and let $\hat{p}$ be the probability
+of success at each trial i.e. $\hat{p} = P(X\ge \mu)$. Then, $E(Y)$, what we
 want, is
 \begin{equation}
   \label{eq:1}
-E(Y) = \sum_{I=1}^\infty i\hat{p}(1-\hat{p})^{i-1}
+E(Y) = \sum_{I=1}^\infty i\hat{p}(1-\hat{p})^{i-1} = 1/p
 \end{equation}
 
 
-So for each run, what is $\hat{p} = P(Y_i = 1) = P(X\ge \mu)$? Using $p
+So for each run, what is $\hat{p} = P(X\ge \mu)$? Using $p
 = P(\text{a clause is satisfied}) = 1 - 2^{-k}$:
 \begin{align*}
   P(X\ge \mu) &= 1 - P(X < \mu)\\
@@ -97,8 +97,8 @@ So we can continue the above inequalitywith:
   P(X\ge \mu) &= 1 - \sum_{i=0}^{\mu-1}{m \choose i}p^i(1-p)^{m-i}\\
   &\ge 1 -[ 2^{m-1} (1-2^{-k})^m] = 1-2^{-k}
 \end{align*}
-As an example with $k=1$, this $P(X\ge \mu)=\hat{p}$ is just $1/2$.
-Using that \ref{eq:1}, we get $E[Y] = ...$. The
+As an example, with $k=1$ $\hat{p}$ is  $1/2$.
+Using \ref{eq:1}, we get $E[Y] = 2$. The
 algorithm is.. very efficient.
 
 ...\\Really..? * is where I'm not sure. Perhaps this is just too
