@@ -69,7 +69,7 @@ has a binomial distribution*. Let $Y$ be the number of runs needed for
 the LV to terminate, i.e. number of trials before the first sucess. So
 $Y$ has a geometric distribution and let $\hat{p}$ be the probability
 of success at each trial i.e. $\hat{p} = P(X\ge \mu)$. Then, $E(Y)$, what we
-want, is
+want, is*
 \begin{equation}
   \label{eq:1}
 E(Y) = \sum_{I=1}^\infty i\hat{p}(1-\hat{p})^{i-1} = 1/p
@@ -98,10 +98,12 @@ So we can continue the above inequalitywith:
   &\ge 1 -[ 2^{m-1} (1-2^{-k})^m] = 1-2^{-k}
 \end{align*}
 As an example, with $k=1$ $\hat{p}$ is  $1/2$.
-Using \ref{eq:1}, we get $E[Y] = 2$. The
-algorithm is.. very efficient.
+Using \ref{eq:1}, we get $E[Y] = 2$....
 
-...\\Really..? * is where I'm not sure. Perhaps this is just too
+Seriously? If $E[Y] = \frac{1}{1-2^{-k}}$, the bigger the $k$, the
+faster the algorithm.. But that makes sense.
+
+Parts with * are the parts where I'm not sure. Perhaps this is just too
 much. Can one always say $P(X\ge \mu) \ge 1/2$?? I wasn't sure.
 
 \item[(b)] Give a derandomization of the randomized algorithm using

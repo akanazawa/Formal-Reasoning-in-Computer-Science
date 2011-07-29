@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.2.14)  28 JUL 2011 03:09
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2010.2.14)  28 JUL 2011 23:59
 entering extended mode
  %&-line parsing enabled.
 **\input aliceQch6.tex
@@ -119,7 +119,7 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 [1
 
 {/usr/local/texlive/2009basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (17.71443pt too wide) in paragraph at lines 121--126
+Overfull \hbox (17.71443pt too wide) in paragraph at lines 123--128
 \OT1/cmr/m/n/10 false. Each has prob-a-bil-ity $1\OML/cmm/m/it/10 =\OT1/cmr/m/n
 /10 2$. So $\OML/cmm/m/it/10 E\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X\OMS/cmsy/m/n/
 10 j\OML/cmm/m/it/10 x[]; [] ; x[]\OT1/cmr/m/n/10 ) = []\OML/cmm/m/it/10 E\OT1/
@@ -132,7 +132,7 @@ OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 x[]; [] ; x[] \OT1/cmr/m/n/10 =
 Here is how much of TeX's memory you used:
  882 strings out of 494725
  10163 string characters out of 3170734
- 63771 words of memory out of 3000000
+ 64771 words of memory out of 3000000
  4144 multiletter control sequences out of 15000+200000
  10420 words of font info for 37 fonts, out of 3000000 for 9000
  188 hyphenation exceptions out of 8191
@@ -150,11 +150,12 @@ c/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2009b
 asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/200
 9basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive
 /2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/
-texlive/2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on aliceQch6.pdf (2 pages, 155549 bytes).
+live/2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/
+texlive/2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/loc
+al/texlive/2009basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on aliceQch6.pdf (2 pages, 163297 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
+ 69 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
