@@ -12,12 +12,12 @@
 \def\theset{\arabic{set}}
 \def\theequation{\theset.\arabic{equation}}
 
-\title{Probability and Computing Chapter 6 Notes and Questions} 
+\title{Probability and Computing Notes and Questions} 
  \markboth{Chp6}{}
 \author{Angjoo Kanazawa}
 
 \date{\today}
-\setcounter{set}{1}
+\setcounter{set}{6}
 
 
 \begin{document}
@@ -98,13 +98,12 @@ So we can continue the above inequalitywith:
   &\ge 1 -[ 2^{m-1} (1-2^{-k})^m] = 1-2^{-k}
 \end{align*}
 As an example, with $k=1$ $\hat{p}$ is  $1/2$.
-Using \ref{eq:1}, we get $E[Y] = 2$....
+Using \ref{eq:1}, we get $E[Y] = 2$.
 
-Seriously? If $E[Y] = \frac{1}{1-2^{-k}}$, the bigger the $k$, the
+.. If $E[Y] = \frac{1}{1-2^{-k}}$, the bigger the $k$, the
 faster the algorithm.. But that makes sense.
 
-Parts with * are the parts where I'm not sure. Perhaps this is just too
-much. Can one always say $P(X\ge \mu) \ge 1/2$?? I wasn't sure.
+Can one always say $P(X\ge \mu) \ge 1/2$?
 
 \item[(b)] Give a derandomization of the randomized algorithm using
   the method of conditional expectations:\\
@@ -136,6 +135,31 @@ take the better one? Something like that.
 
 \end{enumerate}
 
+\section{Chapter 7 Markov Chains and Random Walks}
+\label{sec:chap7}
+
+\subsection{Markov Chains: Definitions and Representations}
+\label{sec:7.1}
+\begin{itemize}
+\item \textbf{Stochastic process} $\mathbf{X} = \{X(t): t\in T\}$ is a collection of random variables. Often $t$ represents time, where $\mathbf{X}$ models the value of a r.v. $X$ that changes over time.
+\item $X(t)$, or $X_t$ is the \emph{state} of the process at time $t$.
+\item If $X_t$ assumes values from a countably infinite set, $\mathbf{X}$ is a \textbf{discrete space process}. If $X_t$ assumes values from a finite set, then $\mathbf{X}$ is a \textbf{finite process}. If $T$ is a countably finite set, then $\mathbf{X}$ is a \textbf{discrete \emph{time} process}.
+\item Here we focus on a process where $X_t$ depends on $X_{t-1}$, but no other states.
+\item \textbf{Definition:} a \emph{discrete time stochastic process} $X_0, X_1, \dots$ is a Markov chain if 
+  \begin{align*}
+Pr(X_t = a_t | X_{t-1} = a_{t-1}, X_{t-2} = a_{t-2}, \dots, X_0 = a_0) &= P(X_t = a_t | X_{t-1} a_{t-1})\\
+&= P_{a_{t-1}, a_t\cdot}
+  \end{align*} What we said on the point above. $X_t$ depends on $X_{t-1}$ but not on any other past. How we got to $X_{t-1}$ is irrelevant, because all the dependency of $X_t$ is captured by $X_{t-1}$, and this is the \emph{Markov property}.
+\item the \emph{transition probability} $P_{i,j} = P(X_t = j | X_{t-1} = i)$ is the probability that the process moves from $i$ to $j$ in \emph{one step}. The markov property implies that the Markov chain is uniquely defined by the one step \emph{transition matrix}, $\mathbf{P}$, made up of $P_{i,j}$s. $\forall i, \sum_{j\ge 0} P_{i,j} = 1$.
+\item The transition matrix is used to computing the distribution of future states of the process. if $p_i(t)$ denotes hte probability that the process is at state \textbf{$i$} at time $t$, and $\bar{p}(t)$ be the vector of the distribution of the state of the chain at time $t$ (future), summing over al possible states at time $t-1$ we have $$\bar{p}(t) = \bar{p}(t-1)\mathbf{P}$$
+\item for any $n$, the \emph{n-step transition probability} $P^n_{i,j} = P(X_{t+n} = j | X_t = i)$ is the probability that the chain moves from state $i$ to state $j$ in exactly $n$ steps.
+\item using the first transition from $i$, we get $$P^n{i,j} = \sum_{k\ge 0} P_{i, k}P^{n-1}_{k,j}$$
+\item So $P^{(n)}$ is the n-step transition matrix, where the entry in the $i$th row and $j$th col is $P^n_{i,j}$. Then from the above we have $\mathbf{P^{(n)}} = \mathbf{P}\cdot \mathbf{P^{(n-1)}}$. Keep on doing this, we see that $\mathbf{P^{(n)}}$ is just $\mathbf{P^n}$.
+\item So, $\forall t\ge 0 \text{ and } n \ge 1$, $$\bar{p}(t+n) = \bar{p}(t)\mathbf{P}^n$$
+
+\item People represent a Markov chain by a directed, weighted graph $D=(V, E, w)$, where $V$ is the set of states of the chain. $\exists$ an edge $(i,j)\in E$ iff $P_{i,j} > 0$, where the weight, $w(i,j)$ of that edge is $P_{i,j}$. Self-loops are okay. For each $i$ (a state), $\sum_{(i,j) \in E} w(i,j) = 1$. A sequence of visited states is a directed path on $D$.
+\item Example, to calculate the probability of going from state 0 to state 3 \emph{in 3 steps} is the $(0,3)$ entry in $\mathbf{P}^3$. The probability of ending in state 3 after 3 steps where the beginning state if chosen uniformly at random from $n$ states is $(1/n, 1/n, \dots, 1/n)\mathbf{P}^3$. where the $|V|$ long row vector $(1/n, 1/n, \dots, 1/n)$ is the $\bar{p}(0)$ here. (Remember it's right multiplication). That was just $\bar{p}(0+3) = \bar{p}(0)\mathbf{P}^n$.
+\end{itemize}
 
 
 
